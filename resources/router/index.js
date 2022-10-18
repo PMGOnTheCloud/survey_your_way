@@ -6,6 +6,8 @@ import Dashboard from '../src/components/Dashboard.vue';
 import Surveys from '../src/components/Surveys.vue';
 
 import DefaultLayout from '../src/layouts/DefaultLayout.vue';
+import AuthLayout from '../src/layouts/AuthLayout.vue';
+
 
 import store from "../store";
 
@@ -32,7 +34,8 @@ const routes = [
         path: '/auth',
         name: 'Auth',
         redirect: '/login',
-        component: 'AuthLayout',
+        component: AuthLayout,
+        meta: { isGuest: true },
         children: [
             {
                 path: '/login',
@@ -60,7 +63,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     if (to.meta.requiresAuth && !store.state.user.token) {
         next({name: 'Login'});
-    } else if (store.state.user.token && (to.name === 'Login' || to.name === 'Register')) {
+    } else if (to.meta.isGuest && store.state.user.token) {
         next({name: 'Dashboard'});
     } else {
         next();
