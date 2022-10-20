@@ -17,7 +17,8 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string',
+            'firstname' => 'required|string',
+            'surname' => 'nullable|string',
             'email' => 'required|email|string|unique:users,email',
             'password' => [
                 'required',
@@ -28,7 +29,8 @@ class AuthController extends Controller
 
         /** @var \App\Models\User $user */
         $user = User::create([
-            'name' => $data['name'],
+            'firstname' => $data['firstname'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password'])
         ]);
@@ -37,6 +39,6 @@ class AuthController extends Controller
         return response([
             'user' => $user,
             'token' => $token
-        ])
+        ]);
     }
 }
