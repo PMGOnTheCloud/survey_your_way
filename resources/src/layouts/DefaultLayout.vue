@@ -64,7 +64,7 @@
                 <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
               </div>
               <div class="ml-3">
-                <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
+                <div class="text-base font-medium leading-none text-white">{{ user.firstname }} {{ user.surname }}</div>
                 <div class="text-sm font-medium leading-none text-gray-400">{{ user.email }}</div>
               </div>
             </div>
@@ -96,9 +96,11 @@
     ];
 
     function logout() {
-        store.commit('logout');
-        router.push({
-            name: 'Login'
-        })
+        store.dispatch('logout')
+            .then(() => {
+                router.push({
+                    name: 'Login'
+                });
+            });
     }
 </script>
