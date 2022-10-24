@@ -56,11 +56,30 @@
                             </label>
                         </div>
                     </div>
-                    <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                        <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigp-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            Save
+                </div>
+
+                <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
+                    <h3 class="text-2xl font-semibold flex items-center justify-between">
+                        Questions
+                        <button type="button" @click="addQuestion()" class="flex items-center text-sm py-1 px-4 rounded-sm text-white bg-gray-600 hover:bg-gray-700">
+                            Add Question
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                         </button>
+                    </h3>
+                    <div v-if="!model.questions.length" class="text-center text-gray-600">
+                        There are no questions createds
                     </div>
+                    <div v-for="(question, index) in model.questions" :key="question.id">
+                        <QuestionEditor :question="question" :index="index" @change="questionChange" @addQuestion="addQuestion" @deleteQuestion="deleteQuestion" />
+                    </div>
+                </div>
+
+                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                    <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigp-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Save
+                    </button>
                 </div>
             </div>
         </form>
@@ -69,6 +88,7 @@
 
 <script setup>
     import PageComponent from "../layouts/PageComponent.vue";
+    import QuestionEditor from "./QuestionEditor.vue";
     import { ref } from "vue";
     import { useRoute } from "vue-router";
     import { useStore } from "vuex";
