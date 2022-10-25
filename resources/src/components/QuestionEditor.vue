@@ -74,13 +74,13 @@
 
 <script setup>
 
-    import { ref } from "vue";
+    import { ref, computed } from "vue";
     import { useStore } from "vuex";
     import { v4 as uuidv4 } from "uuid";
 
     const store = useStore();
 
-    const questionTypes = store.state.questionTypes;
+    const questionTypes = computed(() => store.state.questionTypes);
 
     const props = defineProps({
         question: Object,

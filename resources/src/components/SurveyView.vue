@@ -95,7 +95,7 @@
 <script setup>
     import PageComponent from "../layouts/PageComponent.vue";
     import QuestionEditor from "./QuestionEditor.vue";
-    import { ref, watch } from "vue";
+    import { ref, watch, computed } from "vue";
     import { useRouter, useRoute } from "vue-router";
     import { useStore } from "vuex";
     import { v4 as uuidv4 } from "uuid";
@@ -104,7 +104,7 @@
     const route = useRoute();
     const store = useStore();
 
-    const surveyLoading = store.state.currentSurvey.loading;
+    const surveyLoading = computed(() => store.state.currentSurvey.loading);
 
     let model = ref({
         title: "",
