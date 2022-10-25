@@ -90,10 +90,11 @@
     import PageComponent from "../layouts/PageComponent.vue";
     import QuestionEditor from "./QuestionEditor.vue";
     import { ref } from "vue";
-    import { useRoute } from "vue-router";
+    import { useRouter, useRoute } from "vue-router";
     import { useStore } from "vuex";
     import { v4 as uuidv4 } from "uuid";
 
+    const router = useRouter();
     const route = useRoute();
     const store = useStore();
 
@@ -137,6 +138,15 @@
             return q;
         });
     };
+
+    function saveSurvey() {
+        store.dispatch("saveSurvey", model.value).then(({data}) => {
+            router.push({
+                name: "SurveyView",
+                params: { id: data.data.id }
+            });
+        });
+    }
 
 </script>
 
