@@ -92,6 +92,7 @@
     import { ref } from "vue";
     import { useRoute } from "vue-router";
     import { useStore } from "vuex";
+    import { v4 as uuidv4 } from "uuid";
 
     const route = useRoute();
     const store = useStore();
@@ -110,6 +111,32 @@
             (s) => s.id === parseInt(route.params.id)
         );
     }
+
+    function addQuestion(index) {
+        const newQuestion = {
+            id: uuidv4(),
+            type: "text",
+            question: "",
+            description: null,
+            data: {},
+        };
+        model.value.questions.splice(index, 0, newQuestion);
+    };
+
+    function deleteQuestion(question) {
+        model.value.questions = model.value.questions.filter(
+            (q) => q !== question
+        );
+    };
+
+    function questionChange(question) {
+        model.value.questions = model.value.questions.map((q) => {
+            if (q.id === question.id) {
+                return JSON.parse(JSON.stringify(question));
+            }
+            return q;
+        });
+    };
 
 </script>
 
