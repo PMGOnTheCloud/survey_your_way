@@ -62,7 +62,7 @@ const store = createStore({
         getSurveys({ commit }) {
             commit('setSurveysLoading', true);
             return axiosClient.get("/survey").then((res) => {
-                commit('setSurveysLoading', true);
+                commit('setSurveysLoading', false);
                 commit('setSurveys', res.data);
                 return res;
             });

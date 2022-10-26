@@ -11,8 +11,9 @@
                 </router-link>
             </div>
         </template>
-    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
-        <SurveyListItem v-for="(survey, index) in surveys" :key="survey.id" :survey="survey" class="opacity-0 animate-fade-in-down" :style="{animationDelay: `${index * 0.07}s`}" @delete="deleteSurvey(survey)" />
+    <div v-if="surveys.loading" class="flex justify-center">Loading...</div>
+    <div v-else class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
+        <SurveyListItem v-for="(survey, index) in surveys.data" :key="survey.id" :survey="survey" class="opacity-0 animate-fade-in-down" :style="{animationDelay: `${index * 0.07}s`}" @delete="deleteSurvey(survey)" />
     </div>
     </PageComponent>
 </template>
@@ -25,7 +26,7 @@
 
     const store = useStore();
 
-    const surveys = computed(() => store.state.surveys.data);
+    const surveys = computed(() => store.state.surveys);
 
     store.dispatch('getSurveys');
 
