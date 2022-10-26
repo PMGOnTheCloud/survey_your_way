@@ -75,7 +75,7 @@
                         </button>
                     </h3>
                     <div v-if="!model.questions.length" class="text-center text-gray-600">
-                        There are no questions createds
+                        There are no questions created
                     </div>
                     <div v-for="(question, index) in model.questions" :key="question.id">
                         <QuestionEditor :question="question" :index="index" @change="questionChange" @addQuestion="addQuestion" @deleteQuestion="deleteQuestion" />
