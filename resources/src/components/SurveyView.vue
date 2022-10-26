@@ -126,7 +126,12 @@
     );
 
     if (route.params.id) {
-        store.dispatch('getSurvey', route.params.id);
+        store.dispatch('getSurvey', route.params.id)
+            .catch((err) => {
+                console.log(err);
+                router.push({
+                name: "Dashboard",
+            })});
     }
 
     function onImageChoose(ev) {

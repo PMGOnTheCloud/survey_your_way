@@ -12,7 +12,7 @@
             </div>
         </template>
     <div v-if="surveys.loading" class="flex justify-center">Loading...</div>
-    <div v-else>
+    <div v-else-if="surveys.data.length">
         <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
             <SurveyListItem v-for="(survey, index) in surveys.data" :key="survey.id" :survey="survey" class="opacity-0 animate-fade-in-down" :style="{animationDelay: `${index * 0.07}s`}" @delete="deleteSurvey(survey)" />
         </div>
@@ -21,6 +21,9 @@
                 <a v-for="(link, index) of surveys.links" :key="index" :disabled="!link.url" href="#" @click="getForPage($event, link)" aria-current="page" class="relative inline-flex items-center px-4 py-2 border text-sm font-medium whitespace-nowrap" :class="[ link.active ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50', index === 0 ? 'rounded-l-md' : '', index === surveys.links.length - 1 ? 'rounded-r-md' : '', ]" v-html="link.label"></a>
             </nav>
         </div>
+    </div>
+    <div v-else class="flex justify-center">
+        No surveys found. Create a new one.
     </div>
     </PageComponent>
 </template>

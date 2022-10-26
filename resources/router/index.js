@@ -60,7 +60,7 @@ const routes = [
         ]
     },
     {
-        path: '/:pathMatch(.*)',
+        path: '/:catchAll(.*)',
         redirect: { name: 'Login' }
     }
 ];
