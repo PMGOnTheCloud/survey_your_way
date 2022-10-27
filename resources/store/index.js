@@ -69,6 +69,9 @@ const store = createStore({
                 return res;
             });
         },
+        saveSurveyAnswer({ commit }, {surveyId, answers}) {
+            return axiosClient.post(`/survey/${surveyId}/answer`, {answers});
+        },
         getSurveyBySlug({ commit }, slug) {
             commit("setCurrentSurveyLoading", true);
             return axiosClient
