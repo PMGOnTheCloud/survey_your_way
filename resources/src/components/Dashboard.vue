@@ -1,7 +1,7 @@
 <template>
     <PageComponent title="Dashboard">
         <div v-if="loading" class="flex justify-center">Loading...</div>
-        <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-gray-700">
+        <div v-else-if="data.latestSurvey" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-gray-700">
 
             <div class="bg-white shadow-md p-3 text-center flex flex-col order-1 lg:order-2 animate-fade-in-down" style="animation-delay: 0.1s">
                 <h3 class="text-2xl font-semibold">Total Surveys</h3>
@@ -71,6 +71,9 @@
                 </a>
             </div>
 
+        </div>
+        <div v-else class="flex justify-center">
+            No surveys found. Create a new one.
         </div>
     </PageComponent>
 </template>
