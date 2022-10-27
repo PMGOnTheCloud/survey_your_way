@@ -5,6 +5,7 @@ import Register from '../src/components/Register.vue';
 import Dashboard from '../src/components/Dashboard.vue';
 import Surveys from '../src/components/Surveys.vue';
 import SurveyView from '../src/components/SurveyView.vue';
+import SurveyPublicView from '../src/components/SurveyPublicView.vue';
 import DefaultLayout from '../src/layouts/DefaultLayout.vue';
 import AuthLayout from '../src/layouts/AuthLayout.vue';
 
@@ -39,6 +40,11 @@ const routes = [
                 component: SurveyView
             },
         ]
+    },
+    {
+        path: '/view/survey/:slug',
+        name: 'SurveyPublicView',
+        component: SurveyPublicView
     },
     {
         path: '/auth',
