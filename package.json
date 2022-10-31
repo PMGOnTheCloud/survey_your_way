@@ -4,6 +4,10 @@
         "dev": "vite",
         "build": "vite build"
     },
+    "engines": {
+        "node": "^18" ,
+        "npm": "^8"
+    },
     "devDependencies": {
         "autoprefixer": "^10.4.12",
         "axios": "^0.27.2",
